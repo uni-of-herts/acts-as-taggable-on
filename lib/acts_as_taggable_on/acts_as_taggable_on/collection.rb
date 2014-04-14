@@ -170,7 +170,7 @@ module ActsAsTaggableOn::Taggable
         tagging_scope = tagging_scope.where("#{ActsAsTaggableOn::Tagging.table_name}.taggable_id IN(#{res})")
         tagging_scope = tagging_scope.group(group_columns).having(having)
 
-        tag_scope = tag_scope.joins("JOIN (#{tagging_scope.to_sql}) AS #{ActsAsTaggableOn::Tagging.table_name} ON #{ActsAsTaggableOn::Tagging.table_name}.tag_id = #{ActsAsTaggableOn::Tag.table_name}.id")
+        tag_scope = tag_scope.joins("JOIN (#{tagging_scope.to_sql}) #{ActsAsTaggableOn::Tagging.table_name} ON #{ActsAsTaggableOn::Tagging.table_name}.tag_id = #{ActsAsTaggableOn::Tag.table_name}.id")
         tag_scope
       end
     end
